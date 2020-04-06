@@ -1,0 +1,20 @@
+version: '2.1'
+volumes:
+  geoserver-data:
+
+services:
+  geoserver:
+    image: kartoza/geoserver:2.15.2
+    hostname: geoserver
+    environment:
+      GEOSERVER_ADMIN_PASSWORD: myawesomegeoserver
+      ENABLE_JSONP: 'true'
+      INITIAL_MEMORY: 3G
+      MAXIMUM_MEMORY: 8G
+    volumes:
+    - geoserver-data:/opt/geoserver/data_dir
+    ports:
+    - 49364:8080
+    user: root
+    links:
+      - osm-db:osm-db
